@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.heeexy.example.dao.ShopsDetailsDao">
+    <select id="selShopsDetails" parameterType="com.alibaba.fastjson.JSONObject" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT
+            d.id id, d.uid userId, d.shops_name shopsName, d.shops_phone shopsPhone, d.shops_address shopsAddress, d.shops_intro shopsIntro,
+            d.business_hours_start businessHoursStart, d.business_hours_end businessHoursEnd
+        FROM
+            sys_shops_details d
+        WHERE
+            d.uid = #{userId}
+    </select>
+
+    <insert id="addShopsDetails" parameterType="com.alibaba.fastjson.JSONObject">
+        INSERT INTO sys_shops_details
+            (uid, shops_name, shops_phone, shops_address, business_hours_start, business_hours_end, shops_intro, create_date, created_by, updated_by)
+        VALUES
+            (#{uId}, #{shopsName}, #{shopsPhone}, #{shopsAddress}, #{businessHoursStart}, #{businessHoursEnd}, #{shopsIntro}, #{createDate}, #{createdBy}, #{updatedBy})
+    </insert>
+
+    <update id="updateShopsDetails" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE
+            sys_shops_details d
+        SET
+            d.shops_name = #{shopsName}, d.shops_phone = #{shopsPhone}, d.shops_address = #{shopsAddress}, d.shops_intro = #{shopsIntro},
+            d.business_hours_start = #{businessHoursStart}, d.business_hours_end = #{businessHoursEnd}
+        WHERE
+            d.uid = #{Id}
+    </update>
+
+    <update id="removeShopsDetails" parameterType="com.alibaba.fastjson.JSONObject">
+        UPDATE
+            sys_shops_details d
+        SET
+            d.status = #{status}
+        WHERE
+            d.uid = #{userId}
+    </update>
+</mapper>
